@@ -1,14 +1,16 @@
-vim.api.nvim_echo({
-  {
-    "Do not use this repository directly\n",
-    "ErrorMsg",
-  },
-  {
-    "Please check the docs on how to get started with LazyVim\n",
-    "WarningMsg",
-  },
-  { "Press any key to exit", "MoreMsg" },
-}, true, {})
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
-vim.fn.getchar()
-vim.cmd([[quit]])
+
+--导入包
+require("lazy").setup({{import="plugins"}})
