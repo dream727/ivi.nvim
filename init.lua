@@ -13,4 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 
 --导入包
-require("lazy").setup({{import="plugins"}})
+require("lazy").setup({
+  {import="plugins"},
+
+})
